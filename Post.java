@@ -1,10 +1,13 @@
 package com.yujongu;
 
+import java.sql.Date;
+
 public class Post {
 	
 	private String title;
 	private String content;
 	private String writer;
+	private Date writtenDate;
 	
 	
 	
@@ -12,6 +15,12 @@ public class Post {
 		this.title = title;
 		this.content = content;
 		this.writer = writer;
+	}
+	public Post(String title, String content, String writer, Date date) {
+		this.title = title;
+		this.content = content;
+		this.writer = writer;
+		this.writtenDate = date;
 	}
 	
 	public String getTitle() {
@@ -32,6 +41,15 @@ public class Post {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
+	public Date getWrittenDate() {
+		return writtenDate;
+	}
+
+	public void setWrittenDate(Date writtenDate) {
+		this.writtenDate = writtenDate;
+	}
+	
+	
 	
 	
 

@@ -1,6 +1,7 @@
 package com.yujongu;
 
 import java.io.IOException;
+import java.sql.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +17,6 @@ import com.yujongu.DAO.LoginDAO;
  */
 @WebServlet("/Login")
 public class LoginServlet extends HttpServlet {
-	
 	LoginDAO loginCred;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,6 +31,8 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("password", password);
 			String nickname = loginCred.retrieveNickname(userName, password);
 			session.setAttribute("nickname", nickname);
+			Date joinedDate = loginCred.retrieveJoinedDate(userName, password);
+			session.setAttribute("date", joinedDate);
 			response.sendRedirect("mainPage.jsp");
 		} else {
 			session.setAttribute("message", "  * Incorrect username or password");

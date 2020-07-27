@@ -1,6 +1,7 @@
 package com.yujongu.DAO;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,6 +10,7 @@ import java.sql.SQLException;
 public class LoginDAO {
 	String sql = "SELECT * FROM login WHERE uname=? and upass=?;";
 	String retrieveNicknameSql = "SELECT nickname FROM login WHERE uname=? and upass=?;";
+	String retrieveJoinedDateSql = "SELECT joinedDate FROM login WHERE uname=? and upass=?;";
 	String url = "jdbc:mysql://localhost:3306/users?characterEncoding=UTF-8&serverTimezone=UTC";
 	String username = "root";
 	String password = "Password1";
@@ -63,6 +65,28 @@ public class LoginDAO {
 		return nickname;
 	}
 	
-	
+	public Date retrieveJoinedDate(String uname, String pword) {
+		Date date = null;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con = DriverManager.getConnection(url, username, password);
+			PreparedStatement st = con.prepareStatement(retrieveJoinedDateSql);
+			st.setNString(1, uname);
+			st.setNString(2, pword);
+			ResultSet rs = st.executeQuery();
+			
+			if(rs.next()) {
+				date = rs.getDate("joinedDate");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return date;
+	}
 
 }

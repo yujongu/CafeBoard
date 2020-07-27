@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class SignUpDAO {
-	String insertSql = "insert into login values(?, ?, null);";
+	String insertSql = "insert into login values(?, ?, null, curdate());";
 	String searchSql = "select * from login where uname=?;";
 	String url = "jdbc:mysql://localhost:3306/users?characterEncoding=UTF-8&serverTimezone=UTC";
 	String username = "root";
